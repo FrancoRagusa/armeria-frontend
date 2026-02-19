@@ -198,7 +198,168 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="mt-24">
+  <div className="rounded-[32px] border border-white/10 bg-black/20 p-8 md:p-12 shadow-[0_30px_100px_rgba(0,0,0,0.6)]">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+      {/* Texto */}
+      <div>
+        <div className="text-xs font-semibold text-white/50 tracking-[0.2em] uppercase">
+          Nuestro Local
+        </div>
+
+        <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+          Atención personalizada en nuestro showroom
+        </h2>
+
+        <p className="mt-5 text-white/60 leading-relaxed">
+          Te esperamos en nuestro local para asesorarte personalmente. 
+          Podés consultar disponibilidad, recibir recomendaciones y ver productos en persona.
+        </p>
+
+        <div className="mt-8 space-y-6">
+
+          {/* Dirección */}
+          <div>
+            <div className="text-xs text-white/50 uppercase tracking-[0.18em]">
+              Dirección
+            </div>
+            <div className="mt-1 text-lg font-medium text-white">
+              Paraguay 1371
+            </div>
+
+            <a
+              href="https://maps.app.goo.gl/jewnDC7pXX1fEgSn9?g_st=iw"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-block text-[var(--dorado)] text-sm hover:opacity-80 transition"
+            >
+              Ver en Google Maps →
+            </a>
+          </div>
+
+          {/* Horarios */}
+          <div>
+            <div className="text-xs text-white/50 uppercase tracking-[0.18em]">
+              Horarios
+            </div>
+            <div className="mt-1 text-lg font-medium text-white">
+              10:00 a 18:00
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="pt-2">
+            <a
+              href="https://wa.me/549XXXXXXXXXX"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-2xl bg-[var(--dorado)] text-black font-medium hover:opacity-90 transition"
+            >
+              Consultar por WhatsApp
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Mapa */}
+      <div className="relative">
+        <div className="rounded-[28px] overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+          <div className="aspect-[4/3]">
+            <iframe
+              title="Mapa Paraguay 1371"
+              className="w-full h-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Paraguay%201371&output=embed"
+            />
+          </div>
+        </div>
+
+        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[var(--dorado)]/10 rounded-full blur-3xl pointer-events-none" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
       </main>
     </div>
+    
   );
 }
+<section className="mt-16">
+  <div className="rounded-[28px] border border-white/10 bg-black/20 p-6 md:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+    <div className="flex items-start justify-between gap-8 flex-wrap">
+      <div className="max-w-xl">
+        <div className="text-xs font-semibold text-white/50 tracking-[0.18em] uppercase">
+          Contacto y Local
+        </div>
+
+        <h2 className="mt-2 text-2xl md:text-3xl font-semibold tracking-tight">
+          Visitá nuestro local físico
+        </h2>
+
+        <p className="mt-3 text-white/60">
+          Atención personalizada. Podés acercarte o consultarnos por WhatsApp para disponibilidad y
+          recomendaciones.
+        </p>
+
+        <div className="mt-6 space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+            <div className="text-xs text-white/50 tracking-[0.18em] uppercase font-semibold">
+              Dirección
+            </div>
+            <div className="mt-2 text-white font-medium">Paraguay 1371</div>
+            <a
+              href="https://maps.app.goo.gl/jewnDC7pXX1fEgSn9?g_st=iw"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex text-sm text-[var(--dorado)] hover:opacity-90 transition"
+            >
+              Ver en Google Maps →
+            </a>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+            <div className="text-xs text-white/50 tracking-[0.18em] uppercase font-semibold">
+              Horarios
+            </div>
+            <div className="mt-2 text-white font-medium">10:00 a 18:00</div>
+          </div>
+
+          {/* Placeholder para fotos (para ahora o más adelante) */}
+          <div className="rounded-2xl border border-white/10 bg-black/25 p-4">
+            <div className="text-xs text-white/50 tracking-[0.18em] uppercase font-semibold">
+              Fotos del local
+            </div>
+            <div className="mt-2 text-white/60 text-sm">
+              Próximamente: vamos a sumar imágenes del local para que lo conozcas antes de venir.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mapa embebido */}
+      <div className="w-full lg:w-[520px]">
+        <div className="rounded-[28px] overflow-hidden border border-white/10 bg-black/25">
+          <div className="aspect-[16/10]">
+            <iframe
+              title="Mapa - Paraguay 1371"
+              className="w-full h-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Paraguay%201371&output=embed"
+            />
+          </div>
+        </div>
+
+        <div className="mt-3 text-xs text-white/40">
+          *El mapa se abre mejor en Google Maps desde el link.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
