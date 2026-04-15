@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { api } from "../api/clienteApi.js";
 import ProductoCard from "../components/ProductoCard.jsx";
 import Paginacion from "../components/Paginacion.jsx";
@@ -19,25 +20,25 @@ function Chip({ label, value, onClear }) {
 }
 
 export default function Catalogo() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
 
-  // filtros
-  const [buscar, setBuscar] = useState("");
-  const [categoriaSlug, setCategoriaSlug] = useState("");
-  const [marcaSlug, setMarcaSlug] = useState("");
-  const [calibre, setCalibre] = useState("");
-  const [precioMin, setPrecioMin] = useState("");
-  const [precioMax, setPrecioMax] = useState("");
-  const [aumento, setAumento] = useState("");
+  const [buscar, setBuscar] = useState(searchParams.get("buscar") || "");
+  const [categoriaSlug, setCategoriaSlug] = useState(searchParams.get("categoria_slug") || "");
+  const [marcaSlug, setMarcaSlug] = useState(searchParams.get("marca_slug") || "");
+  const [calibre, setCalibre] = useState(searchParams.get("calibre") || "");
+  const [precioMin, setPrecioMin] = useState(searchParams.get("precioMin") || "");
+  const [precioMax, setPrecioMax] = useState(searchParams.get("precioMax") || "");
+  const [aumento, setAumento] = useState(searchParams.get("aumento") || "");
 
-  // UI
   const [drawer, setDrawer] = useState(false);
 
-  // paginación
-  const [pagina, setPagina] = useState(1);
+  const initialPagina = Number(searchParams.get("pagina") || "1");
+  const [pagina, setPagina] = useState(Number.isFinite(initialPagina) && initialPagina > 0 ? initialPagina : 1);
   const [limite] = useState(12);
 
   const [filtros, setFiltros] = useState({
@@ -60,7 +61,7 @@ export default function Catalogo() {
         precios: data.precios || { min_precio: 0, max_precio: 0 },
       });
     } catch (_) {
-      // fallback si querés mantenerlo, pero ideal es que /filtros siempre funcione.
+      // noop
     }
   }
 
@@ -98,6 +99,31 @@ export default function Catalogo() {
     cargarProductos();
   }, [params]);
 
+  useEffect(() => {
+    const next = {};
+
+    if (buscar.trim()) next.buscar = buscar.trim();
+    if (categoriaSlug) next.categoria_slug = categoriaSlug;
+    if (marcaSlug) next.marca_slug = marcaSlug;
+    if (calibre) next.calibre = calibre;
+    if (precioMin !== "") next.precioMin = precioMin;
+    if (precioMax !== "") next.precioMax = precioMax;
+    if (categoriaSlug === "opticas" && aumento) next.aumento = aumento;
+    if (pagina > 1) next.pagina = String(pagina);
+
+    setSearchParams(next, { replace: true });
+  }, [
+    buscar,
+    categoriaSlug,
+    marcaSlug,
+    calibre,
+    precioMin,
+    precioMax,
+    aumento,
+    pagina,
+    setSearchParams,
+  ]);
+
   function limpiar() {
     setBuscar("");
     setCategoriaSlug("");
@@ -113,8 +139,10 @@ export default function Catalogo() {
     if (categoriaSlug !== "opticas") setAumento("");
   }, [categoriaSlug]);
 
-  const categoriaNombre = filtros.categorias.find((c) => c.slug === categoriaSlug)?.nombre || "";
-  const marcaNombre = filtros.marcas.find((m) => m.slug === marcaSlug)?.nombre || "";
+  const categoriaNombre =
+    filtros.categorias.find((c) => c.slug === categoriaSlug)?.nombre || "";
+  const marcaNombre =
+    filtros.marcas.find((m) => m.slug === marcaSlug)?.nombre || "";
 
   const precioChip =
     precioMin || precioMax
@@ -126,7 +154,6 @@ export default function Catalogo() {
   return (
     <div className="bg-[var(--fondo)]">
       <main className="max-w-6xl mx-auto px-4 py-10 text-white">
-        {/* Header compacto + buscador arriba izquierda */}
         <div className="rounded-[28px] border border-white/10 bg-black/20 p-6 md:p-7 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
           <div className="flex items-start justify-between gap-6 flex-wrap">
             <div>
@@ -135,7 +162,6 @@ export default function Catalogo() {
                 Explorá productos por categorías y marcas. Consulta directa por WhatsApp.
               </p>
 
-              {/* Search abajo del título (izquierda) */}
               <div className="mt-6 max-w-xl">
                 <label className="text-xs font-semibold text-white/50 tracking-[0.18em] uppercase">
                   Buscar
@@ -151,7 +177,6 @@ export default function Catalogo() {
                 />
               </div>
 
-              {/* Chips de filtros activos */}
               <div className="mt-4 flex flex-wrap gap-2">
                 <Chip
                   label="Categoría"
@@ -199,7 +224,6 @@ export default function Catalogo() {
               </div>
             </div>
 
-            {/* Acciones derecha */}
             <div className="flex gap-2">
               <button
                 onClick={() => setDrawer(true)}
@@ -218,7 +242,6 @@ export default function Catalogo() {
           </div>
         </div>
 
-        {/* Contenido */}
         <div className="mt-8">
           {error ? (
             <div className="rounded-3xl border border-white/10 bg-black/25 p-6 text-white/80">
@@ -265,7 +288,6 @@ export default function Catalogo() {
           )}
         </div>
 
-        {/* Drawer de filtros */}
         <FiltrosDrawer
           abierto={drawer}
           onCerrar={() => setDrawer(false)}
