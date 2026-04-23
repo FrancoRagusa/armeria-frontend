@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const WHATSAPP_NUM = "549XXXXXXXXXX";
+const WHATSAPP_NUM = "+5491159454757";
 
 export default function ProductoCard({ p }) {
   const estado = p.estado_stock || "consultar_disponibilidad";

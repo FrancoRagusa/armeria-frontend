@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../api/clienteApi.js";
 
-const WHATSAPP_NUM = "549XXXXXXXXXX";
+const WHATSAPP_NUM = "+5491159454757";
 
 export default function ProductoDetalle() {
   const { slug } = useParams();

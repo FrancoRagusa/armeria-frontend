@@ -37,7 +37,7 @@ export default function Navbar() {
           </NavLink>
 
           <a
-            href="https://wa.me/549XXXXXXXXXX"
+            href="https://wa.me/+5491159454757"
             target="_blank"
             rel="noreferrer"
             className="ml-2 px-4 py-2 rounded-xl text-sm bg-[var(--dorado)] text-black font-medium hover:opacity-90 transition"
